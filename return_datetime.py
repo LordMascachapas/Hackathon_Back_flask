@@ -1,14 +1,16 @@
 from flask import Flask
 from flask import jsonify
 import json
+import datetime
+import time
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def init():
-    with open("templates_and_src/data.json", "r") as j_file:
-        dicc = json.load(j_file)
+    timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%d/%m/%Y %H:%M:%S')
+    dicc = {"data": timestamp}
     return jsonify(dicc)
 
 
